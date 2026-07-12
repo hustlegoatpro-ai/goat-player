@@ -2,15 +2,22 @@
   "use strict";
 
   const STARTING_VOLUME = 0.78;
-  const STORAGE_KEY = "goatPlayerVolume";
+  const VOLUME_KEY = "goatPlayerVolume";
+
+  const tracks = [
+    { title: "Changing", artist: "Hustle Goat", src: "changing.mp3" },
+    { title: "Peace", artist: "Hustle Goat", src: "peace.mp3" },
+    { title: "Rever", artist: "Hustle Goat", src: "rever.mp3" },
+    { title: "Onward", artist: "Hustle Goat", src: "onward.mp3" }
+  ];
 
   const audio = document.getElementById("audio");
-  const filePicker = document.getElementById("filePicker");
-  const trackTitle = document.getElementById("trackTitle");
-  const trackArtist = document.getElementById("trackArtist");
-  const playButton = document.getElementById("play");
-  const previousButton = document.getElementById("previous");
-  const nextButton = document.getElementById("next");
+  const title = document.getElementById("trackTitle");
+  const artist = document.getElementById("trackArtist");
+  const count = document.getElementById("trackCount");
+  const play = document.getElementById("play");
+  const previous = document.getElementById("previous");
+  const next = document.getElementById("next");
   const seek = document.getElementById("seek");
   const volume = document.getElementById("volume");
   const volumeValue = document.getElementById("volumeValue");
@@ -18,7 +25,7 @@
   const duration = document.getElementById("duration");
   const journey = document.getElementById("journey");
 
-  let currentObjectUrl = null;
+  let trackIndex = 0;
 
   function formatTime(seconds) {
     if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
@@ -32,13 +39,36 @@
       journey.style.setProperty("--progress", "3%");
       return;
     }
-
     const ratio = audio.currentTime / audio.duration;
-    const percent = 3 + ratio * 77;
-    journey.style.setProperty("--progress", `${percent}%`);
+    journey.style.setProperty("--progress", `${3 + ratio * 76}%`);
   }
 
-  const saved = Number(localStorage.getItem(STORAGE_KEY));
+  function setPlayState(playing) {
+    play.textContent = playing ? "Ⅱ" : "▶";
+    play.setAttribute("aria-label", playing ? "Pause" : "Play");
+  }
+
+  function loadTrack(index, autoplay = false) {
+    trackIndex = (index + tracks.length) % tracks.length;
+    const track = tracks[trackIndex];
+
+    audio.src = track.src;
+    title.textContent = track.title;
+    artist.textContent = track.artist;
+    count.textContent = `${trackIndex + 1} / ${tracks.length}`;
+    currentTime.textContent = "0:00";
+    duration.textContent = "0:00";
+    seek.value = "0";
+    journey.style.setProperty("--progress", "3%");
+    setPlayState(false);
+    audio.load();
+
+    if (autoplay) {
+      audio.play().catch(error => console.error("Playback failed:", error));
+    }
+  }
+
+  const saved = Number(localStorage.getItem(VOLUME_KEY));
   const initialVolume = Number.isFinite(saved)
     ? Math.min(1, Math.max(0, saved))
     : STARTING_VOLUME;
@@ -47,36 +77,14 @@
   volume.value = String(initialVolume);
   volumeValue.textContent = `${Math.round(initialVolume * 100)}%`;
 
-  filePicker.addEventListener("change", () => {
-    const file = filePicker.files && filePicker.files[0];
-    if (!file) return;
-
-    if (currentObjectUrl) {
-      URL.revokeObjectURL(currentObjectUrl);
-    }
-
-    currentObjectUrl = URL.createObjectURL(file);
-    audio.src = currentObjectUrl;
-    audio.load();
-
-    trackTitle.textContent = file.name.replace(/\.[^.]+$/, "");
-    trackArtist.textContent = "Local audio file";
-    currentTime.textContent = "0:00";
-    duration.textContent = "0:00";
-    seek.value = "0";
-    updateGoaty();
-  });
-
   volume.addEventListener("input", () => {
     const value = Number(volume.value);
     audio.volume = value;
     volumeValue.textContent = `${Math.round(value * 100)}%`;
-    localStorage.setItem(STORAGE_KEY, String(value));
+    localStorage.setItem(VOLUME_KEY, String(value));
   });
 
-  playButton.addEventListener("click", async () => {
-    if (!audio.src) return;
-
+  play.addEventListener("click", async () => {
     if (audio.paused) {
       try {
         await audio.play();
@@ -88,15 +96,11 @@
     }
   });
 
-  audio.addEventListener("play", () => {
-    playButton.textContent = "Ⅱ";
-    playButton.setAttribute("aria-label", "Pause");
-  });
+  previous.addEventListener("click", () => loadTrack(trackIndex - 1, true));
+  next.addEventListener("click", () => loadTrack(trackIndex + 1, true));
 
-  audio.addEventListener("pause", () => {
-    playButton.textContent = "▶";
-    playButton.setAttribute("aria-label", "Play");
-  });
+  audio.addEventListener("play", () => setPlayState(true));
+  audio.addEventListener("pause", () => setPlayState(false));
 
   audio.addEventListener("loadedmetadata", () => {
     duration.textContent = formatTime(audio.duration);
@@ -115,24 +119,11 @@
     updateGoaty();
   });
 
-  previousButton.addEventListener("click", () => {
-    audio.currentTime = 0;
-    updateGoaty();
+  audio.addEventListener("ended", () => loadTrack(trackIndex + 1, true));
+
+  audio.addEventListener("error", () => {
+    console.error(`Could not load ${tracks[trackIndex].src}`);
   });
 
-  nextButton.addEventListener("click", () => {
-    if (Number.isFinite(audio.duration)) {
-      audio.currentTime = Math.max(0, audio.duration - 0.05);
-      updateGoaty();
-    }
-  });
-
-  audio.addEventListener("ended", () => {
-    audio.currentTime = 0;
-    seek.value = "0";
-    currentTime.textContent = "0:00";
-    updateGoaty();
-  });
-
-  updateGoaty();
+  loadTrack(0, false);
 })();
