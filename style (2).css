@@ -1,0 +1,274 @@
+:root {
+  color-scheme: dark;
+  --gold: #f4bf2a;
+  --gold-dark: #8c6b14;
+  --white: #ffffff;
+  --muted: #b8b8b8;
+  --line: #4a4a4a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #000;
+  color: var(--white);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.page {
+  width: min(100%, 470px);
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.player {
+  min-height: 650px;
+  padding: 18px 18px 20px;
+  border: 1px solid rgba(244, 191, 42, 0.5);
+  border-radius: 28px;
+  background: #000;
+  overflow: hidden;
+}
+
+.logo {
+  display: block;
+  width: 104px !important;
+  height: 104px !important;
+  max-width: 104px !important;
+  max-height: 104px !important;
+  margin: -4px auto -15px;
+  object-fit: contain;
+}
+
+.peace {
+  width: fit-content;
+  margin: 0 auto 18px;
+  color: var(--gold);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 30px;
+  font-style: italic;
+  line-height: 1;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 58px;
+  gap: 14px;
+  align-items: start;
+}
+
+.main-column {
+  min-width: 0;
+}
+
+.track-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  margin-bottom: 7px;
+}
+
+.note {
+  color: var(--gold);
+  font-size: 23px;
+}
+
+.track-info h1 {
+  margin: 0;
+  font-size: 17px;
+  line-height: 1.15;
+}
+
+.track-info p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.file-button {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 10px;
+  padding: 7px 12px;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  color: var(--gold);
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.file-button input {
+  display: none;
+}
+
+.seek-row {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) 36px;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+}
+
+#seek {
+  width: 100%;
+  accent-color: var(--gold);
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 27px;
+  margin-bottom: 10px;
+}
+
+.controls button {
+  border: 0;
+  background: transparent;
+  color: var(--white);
+  font-size: 21px;
+  cursor: pointer;
+}
+
+.controls .play {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  padding-left: 3px;
+}
+
+.journey {
+  --progress: 3%;
+  position: relative;
+  height: 225px;
+}
+
+.journey-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+}
+
+.goaty {
+  position: absolute;
+  left: var(--progress);
+  bottom: 29px;
+  width: 70px !important;
+  height: 70px !important;
+  max-width: 70px !important;
+  max-height: 70px !important;
+  object-fit: contain;
+  transform: translateX(-6%);
+  transition: left 100ms linear;
+  z-index: 2;
+}
+
+.hoof {
+  position: absolute;
+  bottom: 18px;
+  color: var(--gold);
+  font-size: 12px;
+  letter-spacing: -2px;
+  transform: rotate(20deg);
+}
+
+.h1 { left: 43%; }
+.h2 { left: 58%; }
+.h3 { left: 73%; }
+.h4 { left: 88%; }
+
+.volume-panel {
+  height: 285px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 4px;
+  border: 1px solid rgba(244, 191, 42, 0.23);
+  border-radius: 16px;
+}
+
+.volume-label {
+  font-size: 10px;
+}
+
+#volume {
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 20px;
+  height: 165px;
+  margin: 0;
+  accent-color: var(--gold);
+  cursor: pointer;
+}
+
+#volumeValue {
+  color: var(--muted);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+}
+
+footer {
+  margin-top: -2px;
+  text-align: center;
+  color: var(--gold);
+  font-size: 11px;
+}
+
+footer small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 9px;
+}
+
+button:focus-visible,
+input:focus-visible,
+.file-button:focus-within {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+@media (max-width: 390px) {
+  .player {
+    padding-inline: 12px;
+  }
+
+  .content-grid {
+    grid-template-columns: minmax(0, 1fr) 52px;
+    gap: 8px;
+  }
+
+  .volume-panel {
+    height: 270px;
+  }
+
+  #volume {
+    height: 150px;
+  }
+
+  .goaty {
+    width: 64px !important;
+    height: 64px !important;
+    max-width: 64px !important;
+    max-height: 64px !important;
+  }
+}
