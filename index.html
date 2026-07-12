@@ -10,9 +10,7 @@
 <body>
   <main class="page">
     <section class="player" aria-label="Goat Player">
-      <img class="logo" src="goat-player-logo.svg" alt="Goat Player">
-
-      <div class="peace">Peace</div>
+      <img class="logo" src="goat-player-logo.png" alt="Goat Player">
 
       <div class="player-grid">
         <div class="main-column">
@@ -46,6 +44,22 @@
             <span class="hoof h3">••</span>
             <span class="hoof h4">••</span>
           </div>
+
+          <div class="feature-buttons">
+            <button id="shuffleButton" class="feature-button" type="button" aria-pressed="false">
+              <span class="feature-icon" aria-hidden="true">🔀</span>
+              <span>Shuffle</span>
+            </button>
+
+            <button id="playlistButton" class="feature-button" type="button" aria-expanded="false">
+              <span class="feature-icon" aria-hidden="true">☷</span>
+              <span>Playlist</span>
+            </button>
+          </div>
+
+          <div id="playlistPanel" class="playlist-panel" hidden>
+            <ol id="playlist"></ol>
+          </div>
         </div>
 
         <aside class="volume-panel" aria-label="Volume">
@@ -58,11 +72,9 @@
       </div>
 
       <footer>Free • Open Source • Embeddable</footer>
-
       <audio id="audio" preload="metadata"></audio>
     </section>
   </main>
-
   <script src="script.js"></script>
 </body>
 </html>
