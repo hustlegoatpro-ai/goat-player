@@ -5,6 +5,9 @@
   const STORAGE_KEY = "goatPlayerVolume";
 
   const audio = document.getElementById("audio");
+  const filePicker = document.getElementById("filePicker");
+  const trackTitle = document.getElementById("trackTitle");
+  const trackArtist = document.getElementById("trackArtist");
   const playButton = document.getElementById("play");
   const previousButton = document.getElementById("previous");
   const nextButton = document.getElementById("next");
@@ -14,6 +17,8 @@
   const currentTime = document.getElementById("currentTime");
   const duration = document.getElementById("duration");
   const journey = document.getElementById("journey");
+
+  let currentObjectUrl = null;
 
   function formatTime(seconds) {
     if (!Number.isFinite(seconds) || seconds < 0) return "0:00";
@@ -29,7 +34,7 @@
     }
 
     const ratio = audio.currentTime / audio.duration;
-    const percent = 3 + ratio * 78;
+    const percent = 3 + ratio * 77;
     journey.style.setProperty("--progress", `${percent}%`);
   }
 
@@ -42,6 +47,26 @@
   volume.value = String(initialVolume);
   volumeValue.textContent = `${Math.round(initialVolume * 100)}%`;
 
+  filePicker.addEventListener("change", () => {
+    const file = filePicker.files && filePicker.files[0];
+    if (!file) return;
+
+    if (currentObjectUrl) {
+      URL.revokeObjectURL(currentObjectUrl);
+    }
+
+    currentObjectUrl = URL.createObjectURL(file);
+    audio.src = currentObjectUrl;
+    audio.load();
+
+    trackTitle.textContent = file.name.replace(/\.[^.]+$/, "");
+    trackArtist.textContent = "Local audio file";
+    currentTime.textContent = "0:00";
+    duration.textContent = "0:00";
+    seek.value = "0";
+    updateGoaty();
+  });
+
   volume.addEventListener("input", () => {
     const value = Number(volume.value);
     audio.volume = value;
@@ -50,6 +75,8 @@
   });
 
   playButton.addEventListener("click", async () => {
+    if (!audio.src) return;
+
     if (audio.paused) {
       try {
         await audio.play();
@@ -77,7 +104,6 @@
 
   audio.addEventListener("timeupdate", () => {
     if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
-
     currentTime.textContent = formatTime(audio.currentTime);
     seek.value = String(Math.round((audio.currentTime / audio.duration) * 1000));
     updateGoaty();
@@ -106,10 +132,6 @@
     seek.value = "0";
     currentTime.textContent = "0:00";
     updateGoaty();
-  });
-
-  audio.addEventListener("error", () => {
-    console.error("demo-tone.wav could not be loaded. Confirm it is in the repository root.");
   });
 
   updateGoaty();

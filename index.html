@@ -14,15 +14,20 @@
 
       <div class="peace">Peace</div>
 
-      <div class="player-grid">
+      <div class="content-grid">
         <div class="main-column">
           <div class="track-info">
             <span class="note" aria-hidden="true">♫</span>
             <div>
-              <h1>Sample Track</h1>
-              <p>Artist Name</p>
+              <h1 id="trackTitle">No track selected</h1>
+              <p id="trackArtist">Choose an audio file</p>
             </div>
           </div>
+
+          <label class="file-button">
+            Choose Audio
+            <input id="filePicker" type="file" accept="audio/*">
+          </label>
 
           <div class="seek-row">
             <span id="currentTime">0:00</span>
@@ -60,7 +65,7 @@
         <small>Goat only moon walks on a blue moon.</small>
       </footer>
 
-      <audio id="audio" src="demo-tone.wav" preload="metadata"></audio>
+      <audio id="audio" preload="metadata"></audio>
     </section>
   </main>
 

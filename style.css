@@ -24,14 +24,14 @@ body {
 }
 
 .page {
-  width: min(100%, 510px);
+  width: min(100%, 470px);
   margin: 0 auto;
-  padding: 14px;
+  padding: 10px;
 }
 
 .player {
-  min-height: 690px;
-  padding: 18px 22px 22px;
+  min-height: 650px;
+  padding: 18px 18px 20px;
   border: 1px solid rgba(244, 191, 42, 0.5);
   border-radius: 28px;
   background: #000;
@@ -40,29 +40,28 @@ body {
 
 .logo {
   display: block;
-  width: 112px !important;
-  height: 112px !important;
-  max-width: 112px !important;
-  max-height: 112px !important;
-  margin: -2px auto -14px;
+  width: 104px !important;
+  height: 104px !important;
+  max-width: 104px !important;
+  max-height: 104px !important;
+  margin: -4px auto -15px;
   object-fit: contain;
 }
 
 .peace {
   width: fit-content;
-  margin: 0 auto 20px;
+  margin: 0 auto 18px;
   color: var(--gold);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 31px;
+  font-size: 30px;
   font-style: italic;
   line-height: 1;
-  text-shadow: 0 0 12px rgba(244, 191, 42, 0.3);
 }
 
-.player-grid {
+.content-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 62px;
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) 58px;
+  gap: 14px;
   align-items: start;
 }
 
@@ -74,34 +73,51 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 9px;
-  margin-bottom: 8px;
+  gap: 8px;
+  min-height: 42px;
+  margin-bottom: 7px;
 }
 
 .note {
   color: var(--gold);
-  font-size: 24px;
+  font-size: 23px;
 }
 
 .track-info h1 {
   margin: 0;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.15;
 }
 
 .track-info p {
-  margin: 4px 0 0;
+  margin: 3px 0 0;
   color: var(--muted);
+  font-size: 10px;
+}
+
+.file-button {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 10px;
+  padding: 7px 12px;
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  color: var(--gold);
   font-size: 11px;
+  cursor: pointer;
+}
+
+.file-button input {
+  display: none;
 }
 
 .seek-row {
   display: grid;
-  grid-template-columns: 38px minmax(0, 1fr) 38px;
+  grid-template-columns: 36px minmax(0, 1fr) 36px;
   align-items: center;
-  gap: 7px;
-  margin-bottom: 18px;
-  font-size: 10px;
+  gap: 6px;
+  margin-bottom: 16px;
+  font-size: 9px;
   font-variant-numeric: tabular-nums;
 }
 
@@ -114,21 +130,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 28px;
-  margin-bottom: 14px;
+  gap: 27px;
+  margin-bottom: 10px;
 }
 
 .controls button {
   border: 0;
   background: transparent;
   color: var(--white);
-  font-size: 22px;
+  font-size: 21px;
   cursor: pointer;
 }
 
 .controls .play {
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   display: grid;
   place-items: center;
   border: 2px solid var(--gold);
@@ -139,14 +155,14 @@ body {
 .journey {
   --progress: 3%;
   position: relative;
-  height: 240px;
+  height: 225px;
 }
 
 .journey-line {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 30px;
+  bottom: 28px;
   height: 2px;
   background: linear-gradient(90deg, var(--gold), var(--gold-dark));
 }
@@ -154,26 +170,24 @@ body {
 .goaty {
   position: absolute;
   left: var(--progress);
-  bottom: 31px;
-  width: 76px !important;
-  height: 76px !important;
-  max-width: 76px !important;
-  max-height: 76px !important;
+  bottom: 29px;
+  width: 70px !important;
+  height: 70px !important;
+  max-width: 70px !important;
+  max-height: 70px !important;
   object-fit: contain;
-  transform: translateX(-8%);
-  transition: left 120ms linear;
+  transform: translateX(-6%);
+  transition: left 100ms linear;
   z-index: 2;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.85));
 }
 
 .hoof {
   position: absolute;
-  bottom: 20px;
+  bottom: 18px;
   color: var(--gold);
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: -2px;
   transform: rotate(20deg);
-  opacity: 0.9;
 }
 
 .h1 { left: 43%; }
@@ -182,85 +196,79 @@ body {
 .h4 { left: 88%; }
 
 .volume-panel {
-  height: 330px;
+  height: 285px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
-  padding: 12px 6px;
+  gap: 8px;
+  padding: 10px 4px;
   border: 1px solid rgba(244, 191, 42, 0.23);
-  border-radius: 18px;
+  border-radius: 16px;
 }
 
 .volume-label {
-  font-size: 11px;
-  color: var(--white);
+  font-size: 10px;
 }
 
 #volume {
   writing-mode: vertical-lr;
   direction: rtl;
-  width: 22px;
-  height: 205px;
-  margin: 2px 0;
+  width: 20px;
+  height: 165px;
+  margin: 0;
   accent-color: var(--gold);
   cursor: pointer;
 }
 
 #volumeValue {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 10px;
   font-variant-numeric: tabular-nums;
 }
 
 footer {
-  margin-top: -5px;
+  margin-top: -2px;
   text-align: center;
   color: var(--gold);
-  font-size: 12px;
+  font-size: 11px;
 }
 
 footer small {
   display: block;
-  margin-top: 6px;
+  margin-top: 5px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 9px;
 }
 
 button:focus-visible,
-input:focus-visible {
+input:focus-visible,
+.file-button:focus-within {
   outline: 2px solid var(--gold);
   outline-offset: 3px;
 }
 
-@media (max-width: 420px) {
-  .page {
-    padding: 6px;
-  }
-
+@media (max-width: 390px) {
   .player {
-    padding-inline: 14px;
-    border-radius: 22px;
+    padding-inline: 12px;
   }
 
-  .player-grid {
-    grid-template-columns: minmax(0, 1fr) 54px;
-    gap: 9px;
+  .content-grid {
+    grid-template-columns: minmax(0, 1fr) 52px;
+    gap: 8px;
   }
 
   .volume-panel {
-    height: 310px;
-    padding-inline: 3px;
+    height: 270px;
   }
 
   #volume {
-    height: 185px;
+    height: 150px;
   }
 
   .goaty {
-    width: 68px !important;
-    height: 68px !important;
-    max-width: 68px !important;
-    max-height: 68px !important;
+    width: 64px !important;
+    height: 64px !important;
+    max-width: 64px !important;
+    max-height: 64px !important;
   }
 }
