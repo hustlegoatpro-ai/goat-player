@@ -10,32 +10,60 @@
 <body>
   <main class="page">
     <section class="player" aria-label="Goat Player">
-      <img class="logo" src="goat-player-logo.svg" alt="Goat Player">
+      <img class="logo" src="goat-player-logo.svg" alt="Goat Player logo">
+
       <div class="peace">Peace</div>
-      <div class="layout">
+
+      <div class="player-grid">
         <div class="main-column">
-          <div class="track-info"><span class="note">♫</span><div><h1>Sample Track</h1><p>Artist Name</p></div></div>
-          <div class="seek-row"><span id="currentTime">0:00</span><input id="seek" type="range" min="0" max="1000" value="0" aria-label="Song position"><span id="duration">0:00</span></div>
+          <div class="track-info">
+            <span class="note" aria-hidden="true">♫</span>
+            <div>
+              <h1>Sample Track</h1>
+              <p>Artist Name</p>
+            </div>
+          </div>
+
+          <div class="seek-row">
+            <span id="currentTime">0:00</span>
+            <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Song position">
+            <span id="duration">0:00</span>
+          </div>
+
           <div class="controls">
             <button id="previous" type="button" aria-label="Restart track">|◀</button>
             <button id="play" class="play" type="button" aria-label="Play">▶</button>
             <button id="next" type="button" aria-label="Go to end">▶|</button>
           </div>
+
           <div class="journey" id="journey">
             <div class="journey-line"></div>
-            <img id="goaty" src="goaty.png" alt="Goaty">
-            <span class="hoof h1">•</span><span class="hoof h2">•</span><span class="hoof h3">•</span><span class="hoof h4">•</span>
+            <img id="goaty" class="goaty" src="goaty.png" alt="Goaty">
+            <span class="hoof h1">••</span>
+            <span class="hoof h2">••</span>
+            <span class="hoof h3">••</span>
+            <span class="hoof h4">••</span>
           </div>
         </div>
+
         <aside class="volume-panel" aria-label="Volume">
-          <span>🔊</span>
+          <div class="volume-label">Volume</div>
+          <span aria-hidden="true">🔊</span>
           <input id="volume" type="range" min="0" max="1" step="0.01" value="0.78" aria-label="Volume">
+          <span aria-hidden="true">🔉</span>
           <span id="volumeValue">78%</span>
         </aside>
       </div>
+
+      <footer>
+        <div>Free • Open Source • Embeddable</div>
+        <small>Goat only moon walks on a blue moon.</small>
+      </footer>
+
       <audio id="audio" src="demo-tone.wav" preload="metadata"></audio>
     </section>
   </main>
+
   <script src="script.js"></script>
 </body>
 </html>
