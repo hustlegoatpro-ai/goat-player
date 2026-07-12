@@ -1,86 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#000000">
-  <title>Goat Player</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <main class="page">
-    <section class="player" aria-label="Goat Player">
-      <img class="logo" src="goat-player-logo.png" alt="Goat Player">
-
-      <div class="player-grid">
-        <div class="main-column">
-          <div class="track-info" aria-live="polite">
-            <span class="note" aria-hidden="true">♫</span>
-            <div>
-              <h1 id="trackTitle">Changing</h1>
-              <p id="trackArtist">Hustle Goat</p>
-            </div>
-          </div>
-
-          <div class="track-count" id="trackCount">1 / 4</div>
-
-          <div class="seek-row">
-            <span id="currentTime">0:00</span>
-            <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Song position">
-            <span id="duration">0:00</span>
-          </div>
-
-          <div class="controls">
-            <button id="previous" type="button" aria-label="Previous track">|◀</button>
-            <button id="play" class="play" type="button" aria-label="Play">▶</button>
-            <button id="next" type="button" aria-label="Next track">▶|</button>
-          </div>
-
-          <div class="journey" id="journey">
-            <div class="journey-line"></div>
-            <img class="goaty" src="goaty.png" alt="Goaty">
-            <span class="hoof h1">••</span>
-            <span class="hoof h2">••</span>
-            <span class="hoof h3">••</span>
-            <span class="hoof h4">••</span>
-          </div>
-
-          <div class="feature-buttons">
-            <button id="shuffleButton" class="feature-button" type="button" aria-pressed="false">
-              <span class="feature-icon" aria-hidden="true">🔀</span>
-              <span>Shuffle</span>
-            </button>
-
-            <button id="playlistButton" class="feature-button" type="button" aria-expanded="false">
-              <span class="feature-icon" aria-hidden="true">☷</span>
-              <span>Playlist</span>
-            </button>
-          </div>
-
-          <section id="playlistPanel" class="playlist-panel" hidden aria-label="Playlist">
-            <div class="playlist-header">
-              <span id="playlistHeading">Playlist (4)</span>
-              <button id="closePlaylist" type="button" aria-label="Hide playlist">⌃</button>
-            </div>
-            <ol id="playlist"></ol>
-          </section>
-        </div>
-
-        <aside class="volume-panel" aria-label="Volume">
-          <span class="volume-title">Volume</span>
-          <span aria-hidden="true">🔊</span>
-          <input id="volume" type="range" min="0" max="1" step="0.01" value="0.78" aria-label="Volume">
-          <span aria-hidden="true">🔉</span>
-          <span id="volumeValue">78%</span>
-        </aside>
-      </div>
-
-      <footer>Free • Open Source • Embeddable</footer>
-
-      <audio id="audio" preload="metadata"></audio>
-    </section>
-  </main>
-
-  <script src="script.js"></script>
-</body>
-</html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000"><title>Goat Player</title><link rel="stylesheet" href="style.css"></head><body><main class="page"><section class="player">
+<button id="artworkButton" class="artwork"><img id="artworkImage" src="goat-player-logo.png" alt="Current song artwork"><span>Click to upload / change image</span><small>Recommended: Square (1:1)</small></button><input id="artworkPicker" type="file" accept="image/*" hidden>
+<div class="track"><span>♫</span><div><h1 id="trackTitle">Changing</h1><p id="trackArtist">Hustle Goat</p></div></div><div id="trackCount" class="count">1 / 4</div>
+<div class="seek"><span id="currentTime">0:00</span><input id="seek" type="range" min="0" max="1000" value="0"><span id="duration">0:00</span></div>
+<div class="controls"><button id="previous">|◀</button><button id="play" class="play">▶</button><button id="next">▶|</button></div>
+<div id="journey" class="journey"><div class="line"></div><img src="goaty.png" class="goaty" alt="Goaty"><i class="p1">••</i><i class="p2">••</i><i class="p3">••</i><i class="p4">••</i></div>
+<div class="features"><button id="shuffleButton" aria-pressed="false"><b>🔀</b><span>Shuffle</span></button><button id="playlistButton" aria-expanded="false"><b>☷</b><span>Playlist</span></button><div class="volume"><span>Volume</span><div><b>🔉</b><input id="volume" type="range" min="0" max="1" step=".01" value=".78"><b>🔊</b></div><small id="volumeValue">78%</small></div></div>
+<section id="playlistPanel" class="playlist" hidden><header><b id="playlistHeading">Playlist (4)</b><button id="closePlaylist">⌃</button></header><ol id="playlist"></ol></section><input id="audioPicker" type="file" accept="audio/*" hidden>
+<footer>Free • Open Source • Embeddable</footer><audio id="audio" preload="metadata"></audio></section></main><script src="script.js"></script></body></html>
