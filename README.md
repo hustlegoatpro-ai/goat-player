@@ -2,23 +2,22 @@
 
 A free, open-source web audio player for independent artists.
 
-## Included sample tracks
+## This update
 
-- Changing
-- Peace
-- Rever
-- Onward
+- Song title and artist stay synchronized between the player and playlist.
+- Playlist rows show title, artist, and duration.
+- Playlist can be shown or hidden.
+- Volume control is moved upward beside the progress and control area.
+- Goaty's walking path is shortened to keep the layout compact.
+- Shuffle remains available.
+
+## Included tracks
+
+- Changing — Hustle Goat
+- Peace — Hustle Goat
+- Rever — Hustle Goat
+- Onward — Hustle Goat
 
 ## GitHub Pages
 
 Upload every file in this package to the repository root.
-
-Then open:
-
-**Settings → Pages → Deploy from a branch → main → / (root)**
-
-## License
-
-The source code is released under the MIT License.
-
-Music and visual assets remain subject to their respective owners' permissions and are not automatically relicensed by the MIT License.

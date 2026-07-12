@@ -57,9 +57,13 @@
             </button>
           </div>
 
-          <div id="playlistPanel" class="playlist-panel" hidden>
+          <section id="playlistPanel" class="playlist-panel" hidden aria-label="Playlist">
+            <div class="playlist-header">
+              <span id="playlistHeading">Playlist (4)</span>
+              <button id="closePlaylist" type="button" aria-label="Hide playlist">⌃</button>
+            </div>
             <ol id="playlist"></ol>
-          </div>
+          </section>
         </div>
 
         <aside class="volume-panel" aria-label="Volume">
@@ -72,9 +76,11 @@
       </div>
 
       <footer>Free • Open Source • Embeddable</footer>
+
       <audio id="audio" preload="metadata"></audio>
     </section>
   </main>
+
   <script src="script.js"></script>
 </body>
 </html>
